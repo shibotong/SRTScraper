@@ -28,6 +28,7 @@ struct ContentView: View {
                 }
             }
             SubtitlesView(subtitles: environment.subtitles)
+                .frame(minHeight: 300)
         }
         .fileExporter(isPresented: $isShareSheetPresented, document: environment.document, contentType: .plainText) { result in
             switch result {
