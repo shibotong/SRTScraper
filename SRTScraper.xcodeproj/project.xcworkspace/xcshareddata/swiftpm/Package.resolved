@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "resizablerectangle",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/shibotong/ResizableRectangle.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "5b9e48428cce69a5ee9e97b84d6918a255be2ed7"
+      }
+    }
+  ],
+  "version" : 2
+}
