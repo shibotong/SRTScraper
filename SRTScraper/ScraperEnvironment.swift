@@ -7,7 +7,6 @@
 
 import Foundation
 import AVKit
-import VideoFrameExtractor
 import SRTScraperOCR
 
 class ScraperEnvironment: ObservableObject {

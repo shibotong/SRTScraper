@@ -1,3 +1,10 @@
+//
+//  ScraperOCR.swift
+//  SRTScraper
+//
+//  Created by Shibo Tong on 14/8/2023.
+//
+
 import CoreGraphics
 import Vision
 

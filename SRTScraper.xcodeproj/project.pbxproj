@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7900DF692A8A36F300B4080F /* VideoFrameExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7900DF682A8A36F300B4080F /* VideoFrameExtractor.swift */; };
+		7900DF6B2A8A372100B4080F /* ScraperOCR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7900DF6A2A8A372100B4080F /* ScraperOCR.swift */; };
 		7956A8FE2A86543C008EC09B /* ScraperCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7956A8FD2A86543C008EC09B /* ScraperCommands.swift */; };
 		7956A9002A865722008EC09B /* ScraperEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7956A8FF2A865722008EC09B /* ScraperEnvironment.swift */; };
 		7956A9042A865AEF008EC09B /* previewVideo.mov in Resources */ = {isa = PBXBuildFile; fileRef = 7956A9032A865AEF008EC09B /* previewVideo.mov */; };
@@ -17,8 +19,6 @@
 		7956A9372A886185008EC09B /* SRTScraperConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7956A9362A886185008EC09B /* SRTScraperConstants.swift */; };
 		7956A9392A886344008EC09B /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7956A9382A886344008EC09B /* String+Extension.swift */; };
 		7956A9402A8A353C008EC09B /* ResizableRectangle in Frameworks */ = {isa = PBXBuildFile; productRef = 7956A93F2A8A353C008EC09B /* ResizableRectangle */; };
-		7956A9442A8A35FE008EC09B /* SRTScraperOCR in Resources */ = {isa = PBXBuildFile; fileRef = 7956A9432A8A35FE008EC09B /* SRTScraperOCR */; };
-		7956A9462A8A360E008EC09B /* SRTScraperOCR in Frameworks */ = {isa = PBXBuildFile; productRef = 7956A9452A8A360E008EC09B /* SRTScraperOCR */; };
 		79E479592A85B91C007414AF /* SRTScraperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E479582A85B91C007414AF /* SRTScraperApp.swift */; };
 		79E4795B2A85B91C007414AF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E4795A2A85B91C007414AF /* ContentView.swift */; };
 		79E4795D2A85B91D007414AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79E4795C2A85B91D007414AF /* Assets.xcassets */; };
@@ -46,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7900DF682A8A36F300B4080F /* VideoFrameExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoFrameExtractor.swift; sourceTree = "<group>"; };
+		7900DF6A2A8A372100B4080F /* ScraperOCR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScraperOCR.swift; sourceTree = "<group>"; };
 		7956A8FD2A86543C008EC09B /* ScraperCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScraperCommands.swift; sourceTree = "<group>"; };
 		7956A8FF2A865722008EC09B /* ScraperEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScraperEnvironment.swift; sourceTree = "<group>"; };
 		7956A9032A865AEF008EC09B /* previewVideo.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = previewVideo.mov; sourceTree = "<group>"; };
@@ -56,7 +58,6 @@
 		7956A9342A87B167008EC09B /* CMTime+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMTime+Extension.swift"; sourceTree = "<group>"; };
 		7956A9362A886185008EC09B /* SRTScraperConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRTScraperConstants.swift; sourceTree = "<group>"; };
 		7956A9382A886344008EC09B /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
-		7956A9432A8A35FE008EC09B /* SRTScraperOCR */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SRTScraperOCR; sourceTree = "<group>"; };
 		79E479552A85B91C007414AF /* SRTScraper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SRTScraper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79E479582A85B91C007414AF /* SRTScraperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRTScraperApp.swift; sourceTree = "<group>"; };
 		79E4795A2A85B91C007414AF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -75,7 +76,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7956A9462A8A360E008EC09B /* SRTScraperOCR in Frameworks */,
 				7956A9402A8A353C008EC09B /* ResizableRectangle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -104,18 +104,9 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		7956A9422A8A35FE008EC09B /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				7956A9432A8A35FE008EC09B /* SRTScraperOCR */,
-			);
-			path = Packages;
-			sourceTree = "<group>";
-		};
 		79E4794C2A85B91C007414AF = {
 			isa = PBXGroup;
 			children = (
-				7956A9422A8A35FE008EC09B /* Packages */,
 				79E479572A85B91C007414AF /* SRTScraper */,
 				79E479692A85B91D007414AF /* SRTScraperTests */,
 				79E479732A85B91D007414AF /* SRTScraperUITests */,
@@ -142,11 +133,13 @@
 				7956A8FD2A86543C008EC09B /* ScraperCommands.swift */,
 				7956A8FF2A865722008EC09B /* ScraperEnvironment.swift */,
 				79E4795A2A85B91C007414AF /* ContentView.swift */,
+				7900DF6A2A8A372100B4080F /* ScraperOCR.swift */,
 				7956A9322A87AE28008EC09B /* TextDocument.swift */,
 				7956A9302A87611F008EC09B /* SubtitlesView.swift */,
 				7956A9242A870D3D008EC09B /* VideoSelectionView.swift */,
 				7956A9342A87B167008EC09B /* CMTime+Extension.swift */,
 				7956A9362A886185008EC09B /* SRTScraperConstants.swift */,
+				7900DF682A8A36F300B4080F /* VideoFrameExtractor.swift */,
 				7956A9382A886344008EC09B /* String+Extension.swift */,
 				79E4795C2A85B91D007414AF /* Assets.xcassets */,
 				79E479612A85B91D007414AF /* SRTScraper.entitlements */,
@@ -199,7 +192,6 @@
 			name = SRTScraper;
 			packageProductDependencies = (
 				7956A93F2A8A353C008EC09B /* ResizableRectangle */,
-				7956A9452A8A360E008EC09B /* SRTScraperOCR */,
 			);
 			productName = SRTScraper;
 			productReference = 79E479552A85B91C007414AF /* SRTScraper.app */;
@@ -294,7 +286,6 @@
 			files = (
 				79E479602A85B91D007414AF /* Preview Assets.xcassets in Resources */,
 				79E4795D2A85B91D007414AF /* Assets.xcassets in Resources */,
-				7956A9442A8A35FE008EC09B /* SRTScraperOCR in Resources */,
 				7956A9042A865AEF008EC09B /* previewVideo.mov in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -321,7 +312,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7956A9372A886185008EC09B /* SRTScraperConstants.swift in Sources */,
+				7900DF692A8A36F300B4080F /* VideoFrameExtractor.swift in Sources */,
 				7956A9352A87B167008EC09B /* CMTime+Extension.swift in Sources */,
+				7900DF6B2A8A372100B4080F /* ScraperOCR.swift in Sources */,
 				7956A9332A87AE28008EC09B /* TextDocument.swift in Sources */,
 				7956A9002A865722008EC09B /* ScraperEnvironment.swift in Sources */,
 				7956A9252A870D3D008EC09B /* VideoSelectionView.swift in Sources */,
@@ -664,10 +657,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7956A93E2A8A353C008EC09B /* XCRemoteSwiftPackageReference "ResizableRectangle" */;
 			productName = ResizableRectangle;
-		};
-		7956A9452A8A360E008EC09B /* SRTScraperOCR */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SRTScraperOCR;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
