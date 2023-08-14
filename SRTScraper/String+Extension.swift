@@ -11,6 +11,9 @@ extension String {
     // Function to calculate the
     // Jaro Similarity of two strings
     func distance(_ text: String) -> Double {
+        if text == self {
+            return 1
+        }
         // If the strings are equal
         //if s1 == s2 {
         //    return 1.0
