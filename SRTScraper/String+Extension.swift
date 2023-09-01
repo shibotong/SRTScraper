@@ -89,7 +89,6 @@ extension String {
             }
         }
         t /= 2
-        print(self.count, text.count, match, t)
         
         // Return the Jaro Similarity
         return (Double(match) / Double(len1)

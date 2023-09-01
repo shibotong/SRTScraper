@@ -8,6 +8,7 @@
 import Foundation
 import AVKit
 import SRTScraperOCR
+import UserNotifications
 
 class ScraperEnvironment: ObservableObject {
     
@@ -18,6 +19,8 @@ class ScraperEnvironment: ObservableObject {
     @Published var subtitles: [Subtitle] = []
     
     @Published var cropSize: CGRect = CGRect(x: 0, y: 0, width: 640, height: 360)
+    
+    @Published var title: String = "SRTScraper"
     
     private var frameExtractor: VideoFrameExtractor?
     
@@ -35,6 +38,7 @@ class ScraperEnvironment: ObservableObject {
             return
         }
         frameExtractor = VideoFrameExtractor(video: videoAsset)
+        title = path.lastPathComponent
     }
     
     func generateDocument() {
@@ -67,11 +71,12 @@ class ScraperEnvironment: ObservableObject {
         await setProcessing(true, value: 0.0)
         do {
             let timeArray = try scrapSecond(seconds: seconds)
-            try await scrapFrames(frames: timeArray)
+            await scrapFrames(frames: timeArray)
         } catch {
             print(error)
         }
         await setProcessing(false, value: 0.0)
+        
     }
     
     private func scrapSecond(seconds: Double) throws -> [CMTime] {
@@ -84,7 +89,7 @@ class ScraperEnvironment: ObservableObject {
         return timeArray
     }
     
-    private func scrapFrames(frames: [CMTime]) async throws {
+    private func scrapFrames(frames: [CMTime]) async {
         guard var frameExtractor else {
             return
         }
@@ -102,30 +107,35 @@ class ScraperEnvironment: ObservableObject {
             switch result {
             case .success(requestedTime: _, image: let image, actualTime: let time):
                 await setToTime(time: time)
-                let cropedImage = try cropImage(image: image)
-                let text = await ocrReading(image: cropedImage)
-                if lastText != nil, lastTime != nil {
-                    if lastText!.distance(text) < Constants.similarityPercentage {
-                        await addToSubtitle(text: lastText!, startTime: lastTime!, endTime: time)
+                do {
+                    let cropedImage = try cropImage(image: image)
+                    let text = await ocrReading(image: cropedImage)
+                    if lastText != nil, lastTime != nil {
+                        if lastText!.distance(text) < Constants.similarityPercentage {
+                            await addToSubtitle(text: lastText!, startTime: lastTime!, endTime: time)
+                            if text != "" {
+                                lastText = text
+                                lastTime = time
+                            } else {
+                                lastText = nil
+                                lastTime = nil
+                            }
+                        }
+                    } else {
                         if text != "" {
                             lastText = text
                             lastTime = time
-                        } else {
-                            lastText = nil
-                            lastTime = nil
                         }
                     }
-                } else {
-                    if text != "" {
+                    if text != lastText {
                         lastText = text
-                        lastTime = time
                     }
-                }
-                if text != lastText {
-                    lastText = text
+                } catch {
+                    print("Image crop failure at: \(time)")
+                    continue
                 }
             case .failure(requestedTime: _, error: let error):
-                throw error
+                print(error)
             }
         }
     }
@@ -157,7 +167,6 @@ class ScraperEnvironment: ObservableObject {
     private func ocrReading(image: CGImage) async -> String {
         let ocr = SRTScraperOCR()
         let texts = await ocr.scrapImage(image)
-        print("ocr reading success")
         return texts.joined(separator: " ")
     }
     
@@ -171,6 +180,16 @@ class ScraperEnvironment: ObservableObject {
     @MainActor
     private func setToTime(time: CMTime) {
         self.videoPlayer?.seek(to: time)
+    }
+    
+    private func sendNotification() {
+        let notification = UserNotifications.UNNotification()
+        notification.title = "SRT Scrap finished"
+        notification.subtitle = "\(title)"
+        notification.soundName = NSUserNotificationDefaultSoundName
+        NSUserNotificationCenter.default.deliver(notification)
+        notification.deliveryDate = Date(timeIntervalSinceNow: 5)
+        NSUserNotificationCenter.default.scheduleNotification(notification)
     }
 }
 

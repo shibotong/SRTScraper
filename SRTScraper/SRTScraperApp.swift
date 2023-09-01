@@ -16,6 +16,7 @@ struct SRTScraperApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(environment)
+                .navigationTitle($environment.title)
         }.commands {
             ScraperCommands()
         }

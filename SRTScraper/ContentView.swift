@@ -30,7 +30,7 @@ struct ContentView: View {
             SubtitlesView(subtitles: environment.subtitles)
                 .frame(minHeight: 300)
         }
-        .fileExporter(isPresented: $isShareSheetPresented, document: environment.document, contentType: .plainText) { result in
+        .fileExporter(isPresented: $isShareSheetPresented, document: environment.document, contentType: .plainText, defaultFilename: "\(environment.title).srt") { result in
             switch result {
             case .success(let file):
                 print(file)
