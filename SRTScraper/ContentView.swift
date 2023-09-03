@@ -38,6 +38,9 @@ struct ContentView: View {
                 print(error)
             }
         }
+        .task {
+            try? await environment.requestPushNotification()
+        }
     }
     
     private var scrapButton: some View {

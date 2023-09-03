@@ -76,7 +76,7 @@ class ScraperEnvironment: ObservableObject {
             print(error)
         }
         await setProcessing(false, value: 0.0)
-        
+        sendPushNotification()
     }
     
     private func scrapSecond(seconds: Double) throws -> [CMTime] {
@@ -182,14 +182,23 @@ class ScraperEnvironment: ObservableObject {
         self.videoPlayer?.seek(to: time)
     }
     
-    private func sendNotification() {
-        let notification = UserNotifications.UNNotification()
-        notification.title = "SRT Scrap finished"
-        notification.subtitle = "\(title)"
-        notification.soundName = NSUserNotificationDefaultSoundName
-        NSUserNotificationCenter.default.deliver(notification)
-        notification.deliveryDate = Date(timeIntervalSinceNow: 5)
-        NSUserNotificationCenter.default.scheduleNotification(notification)
+    func requestPushNotification() async throws {
+        try await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound])
+    }
+    
+    private func sendPushNotification() {
+        let content = UNMutableNotificationContent()
+        content.title = "Subtitle Generate Success"
+        content.subtitle = "\(title)"
+
+        // show this notification five seconds from now
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+
+        // choose a random identifier
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+        // add our notification request
+        UNUserNotificationCenter.current().add(request)
     }
 }
 
